@@ -2,6 +2,7 @@ package com.sample.springboot;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,5 +17,11 @@ public class GreetingController {
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         return new Greeting(counter.incrementAndGet(),
                             String.format(template, name));
+    }
+    
+    @RequestMapping(method=RequestMethod.GET, value="/health")
+    public HttpStatus getHealth() {
+        return HttpStatus.OK;
     }	
+
 }
